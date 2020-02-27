@@ -20,16 +20,16 @@ public class CustomerRepositoryImpl implements CustomerRepositoryCustom {
 
     @Transactional
     public List<Customer> findAllByCourseName(String name){
-        List<Customer> result = null;
+        List<Customer> results = null;
 
         Session session = entityManager.unwrap(Session.class);
 
         try {
             Criteria cr = session.createCriteria(Customer.class);
-            cr.createAlias("bookings.course", "courseAlias");
+            cr.createAlias("bookings", "bookingAlias");
+            cr.createAlias("bookingAlias.course", "courseAlias");
             cr.add(Restrictions.eq("courseAlias.name", name));
-
-            result = cr.list();
+            results = cr.list();
         }
         catch(HibernateException ex){
             ex.printStackTrace();
@@ -37,6 +37,6 @@ public class CustomerRepositoryImpl implements CustomerRepositoryCustom {
         finally {
             session.close();
         }
-        return result;
+        return results;
     }
 }
