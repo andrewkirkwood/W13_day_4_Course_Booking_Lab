@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 @RepositoryRestResource
-public interface CustomerRepository extends JpaRepository <Customer, Long> {
-//     List<Customer> findAllByCourseName(String courseName);
+public interface CustomerRepository extends JpaRepository <Customer, Long>, CustomerRepositoryCustom {
+     List<Customer> findAllByCourseName(String name);
 }

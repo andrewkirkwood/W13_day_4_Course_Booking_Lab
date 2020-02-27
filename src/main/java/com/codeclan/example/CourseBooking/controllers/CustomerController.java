@@ -18,8 +18,8 @@ public class CustomerController {
     CustomerRepository customerRepository;
 
 
-//    @GetMapping(value = "/findAllByCourseName")
-//    public List<Customer> findAllByCourseName(@RequestParam String courseName){
-//        return customerRepository.findAllByCourseName(courseName);
-//    }
+    @GetMapping(value = "/findAllByCourseName")
+    public List<Customer> findAllByCourseName(@RequestParam String name){
+        return customerRepository.findAllByCourseName(name);
+    }
 }
