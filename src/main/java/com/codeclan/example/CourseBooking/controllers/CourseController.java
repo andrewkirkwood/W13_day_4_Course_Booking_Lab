@@ -22,6 +22,10 @@ public class CourseController {
         return courseRepository.findByRating(rating);
     }
 
+    @GetMapping(value = "/findAllByCustomerName")
+    public List<Course> findAllByCustomerName(@RequestParam String name) {
+        return courseRepository.findAllByCustomerName(name);
+    }
 
 }
 
