@@ -1,6 +1,7 @@
 package com.codeclan.example.CourseBooking.controllers;
 
 import com.codeclan.example.CourseBooking.models.Course;
+import com.codeclan.example.CourseBooking.models.Customer;
 import com.codeclan.example.CourseBooking.repositories.CourseRepository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,5 +21,7 @@ public class CourseController {
     public List<Course> findByRating(@RequestParam int rating){
         return courseRepository.findByRating(rating);
     }
+
+
 }
 
