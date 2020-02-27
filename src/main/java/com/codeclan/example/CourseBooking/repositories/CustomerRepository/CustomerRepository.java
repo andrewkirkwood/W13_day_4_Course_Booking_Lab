@@ -9,5 +9,8 @@ import java.util.List;
 
 //@RepositoryRestResource
 public interface CustomerRepository extends JpaRepository <Customer, Long>, CustomerRepositoryCustom {
-     List<Customer> findAllByCourseName(String name);
+    List<Customer> findAllByCourseName(String name);
+    List<Customer> findAllByCourseTownAndCourseName(String courseTown, String courseName);
+    List<Customer> findAllOverGivenAgeInCustomerTownNameAndGivenCourseName(int age, String customerTown, String courseName);
+
 }

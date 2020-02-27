@@ -22,4 +22,16 @@ public class CustomerController {
     public List<Customer> findAllByCourseName(@RequestParam String name){
         return customerRepository.findAllByCourseName(name);
     }
+
+    @GetMapping(value = "/findAllByCourseTownAndCourseName")
+    public List<Customer> findAllByCourseTownAndCourseName( @RequestParam String courseTown, String courseName){
+        return customerRepository.findAllByCourseTownAndCourseName(courseTown, courseName);
+    }
+
+    @GetMapping(value = "/findAllOverGivenAgeInCustomerTownNameAndGivenCourseName")
+    public List<Customer> findAllOverGivenAgeInCustomerTownNameAndGivenCourseName(int age, String customerTown, String courseName){
+        return customerRepository.findAllOverGivenAgeInCustomerTownNameAndGivenCourseName(age, customerTown, courseName);
+    }
+
+
 }

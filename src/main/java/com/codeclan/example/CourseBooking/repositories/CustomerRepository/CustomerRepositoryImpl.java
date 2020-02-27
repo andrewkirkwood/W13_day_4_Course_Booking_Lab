@@ -39,4 +39,53 @@ public class CustomerRepositoryImpl implements CustomerRepositoryCustom {
         }
         return results;
     }
+
+    @Transactional
+    public List<Customer> findAllByCourseTownAndCourseName(String courseTown, String courseName){
+        List<Customer> results = null;
+
+        Session session = entityManager.unwrap(Session.class);
+
+        try {
+            Criteria cr = session.createCriteria(Customer.class);
+            cr.createAlias("bookings", "bookingAlias");
+            cr.createAlias("bookingAlias.course", "courseAlias");
+            cr.add(Restrictions.eq("courseAlias.name", courseName));
+            cr.add(Restrictions.eq("courseAlias.town", courseTown));
+            results = cr.list();
+        }
+        catch(HibernateException ex){
+            ex.printStackTrace();
+        }
+        finally {
+            session.close();
+        }
+        return results;
+
+    }
+
+    @Transactional
+    public List<Customer> findAllOverGivenAgeInCustomerTownNameAndGivenCourseName(int age, String customerTown, String courseName){
+        List<Customer> results = null;
+
+        Session session = entityManager.unwrap(Session.class);
+
+        try {
+            Criteria cr = session.createCriteria(Customer.class);
+            cr.add(Restrictions.between("age", age, 200));
+            cr.add(Restrictions.eq("town", customerTown));
+            cr.createAlias("bookings", "bookingAlias");
+            cr.createAlias("bookingAlias.course", "courseAlias");
+            cr.add(Restrictions.eq("courseAlias.name", courseName));
+            results = cr.list();
+        }
+        catch(HibernateException ex){
+            ex.printStackTrace();
+        }
+        finally {
+            session.close();
+        }
+        return results;
+
+    }
 }
